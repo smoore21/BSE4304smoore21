@@ -199,10 +199,7 @@ CN_Model<-function(fnc_CNModel, CNavg = 75,IaFrac = 0.05,fnc_slope=0,
   detach(fnc_CNModel)
   return(fnc_CNModel)
 }
-modeldata$HillslopeAboveExcess=0
-TopSlopeCN=modeldata
-MidSlopeCN=modeldata
-BotSlopeCN=modeldata
+
 # Call the new CN_Model() function with Top,Mid,BotSlope HRU objects,
 # passing the Qpred into the lower HRUs HillslopeAboveExcess (as area scaled flow)
 TopSlopeCN=CN_Model(TopSlopeCN, CNavg = 60)
@@ -219,3 +216,13 @@ BotSlopeCN$HillslopeAboveExcess=MidSlopeCN$Excess
 BotSlopeCN = CN_Model(fnc_CNModel = BotSlopeCN, CNavg = 60,fnc_slope=0, 
                       fnc_aspect=0,func_DAWC=.3,
                       func_z=1000,fnc_fcres=.2)
+
+# Publishing
+package.skeleton("BSEHydroModels",list=c("soil_wetting_above_capacity",
+                                         "soilwetting","soildrying","TMWB_Model","CN_Model"))
+install.packages("BSEHydroModels", repos= NULL)
+
+
+#git config --global user.email "smoore21@vt.edu"
+#git config --global user.name "Sarah M"
+
